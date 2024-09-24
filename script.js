@@ -1,22 +1,40 @@
 const objs = ["scissors", "paper", "rock"];
-let playAgain = true;
 let computerScore = 0;
 let userScore = 0;
-const app = document.querySelector("#app");
-while (playAgain) {
-  let playerChoice = prompt("Choose: scissors, paper, rock");
+const userCell = document.querySelector("#user");
+const computerCell = document.querySelector("#computer");
+const result = document.querySelector("#result");
+const button = document.querySelector("button");
+button.addEventListener("click", playGame);
+function playGame() {
+  button.textContent = "Play Again?";
+  let playerChoice = prompt("Rock, Paper, or Scissors?");
   let playerSelection = playerChoice.toLowerCase();
   let computerSelection = objs[Math.floor(Math.random() * objs.length)];
+  if (playerSelection === null) {
+    return;
+  }
+  if (
+    playerSelection !== "scissors" &&
+    playerSelection !== "paper" &&
+    playerSelection !== "rock"
+  ) {
+    result.textContent = "Invalid choice. Please try again.";
+    return;
+  }
   if (playerSelection === computerSelection) {
-    app.textContent = "It's a tie!";
+    result.textContent = "It's a tie!";
   } else if (
     (playerSelection === "scissors" && computerSelection === "paper") ||
     (playerSelection === "paper" && computerSelection === "rock") ||
     (playerSelection === "rock" && computerSelection === "scissors")
   ) {
-    app.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
+    result.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
+    userScore++;
+    userCell.textContent = userScore;
   } else {
-    app.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
+    result.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
+    computerScore++;
+    computerCell.textContent = computerScore;
   }
-  playAgain = confirm("Play again?");
 }
