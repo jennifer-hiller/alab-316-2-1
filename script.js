@@ -1,10 +1,10 @@
 const objs = ["scissors", "paper", "rock"];
 let computerScore = 0;
 let userScore = 0;
-const userCell = document.querySelector("#user");
-const computerCell = document.querySelector("#computer");
-const result = document.querySelector("#result");
-const button = document.querySelector("button");
+const userCell = document.getElementById("user");
+const computerCell = document.getElementById("computer");
+const result = document.getElementById("result");
+const button = document.getElementById("playAgain");
 button.addEventListener("click", playGame);
 function playGame() {
   button.textContent = "Play Again?";
